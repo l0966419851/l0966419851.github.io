@@ -1,0 +1,348 @@
+/* ==============================
+   1. 頁面整體設定
+   ============================== */
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow-x: hidden;
+  animation: pageFadeIn 0.5s ease-out;
+}
+
+/* ==============================
+   2. 海面場景與視差圖層
+   ============================== */
+
+/* 海面背景容器 */
+.ocean-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-image: url(../IMG/index_ocean1.png);
+  background-size: cover;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* 視差圖層的共同定位與移動過場 */
+.parallax-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transition: transform 0.1s ease-out;
+}
+
+/* 波浪圖片共用尺寸與顯示方式 */
+.waveimg {
+  width: 120%;
+  max-width: none;
+  margin-left: -10%;
+  display: block;
+  pointer-events: none;
+}
+
+/* 場景圖層前後順序；船隻圖層需要接收點擊 */
+.wave4 {
+  z-index: 8;
+  pointer-events: none;
+}
+
+.wave3 {
+  z-index: 7;
+  pointer-events: none;
+}
+
+.wave2 {
+  z-index: 6;
+  pointer-events: none;
+}
+
+.wave1 {
+  z-index: 4;
+  pointer-events: none;
+}
+
+.hor3 {
+  z-index: 3;
+  pointer-events: none;
+}
+
+.isl2 {
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ==============================
+   3. 場景圖片定位與波浪動畫
+   ============================== */
+
+/* 第四層波浪：上下起伏 */
+.ocean-container .wave4 img {
+  position: absolute;
+  bottom: 0;
+  animation: wave4 1s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes wave4 {
+  0% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(20px);
+  }
+}
+
+/* 第三層波浪：左右擺動 */
+.ocean-container .wave3 img {
+  position: absolute;
+  bottom: 100px;
+  animation: wave3 1s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes wave3 {
+  0% {
+    transform: translateX(-20px);
+  }
+  100% {
+    transform: translateX(20px);
+  }
+}
+
+/* 第二層波浪：上下起伏 */
+.ocean-container .wave2 img {
+  position: absolute;
+  bottom: 200px;
+  animation: wave2 1s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes wave2 {
+  0% {
+    transform: translateY(-25px);
+  }
+  100% {
+    transform: translateY(25px);
+  }
+}
+
+/* 第一層波浪：左右擺動 */
+.ocean-container .wave1 img {
+  position: absolute;
+  bottom: 300px;
+  animation: wave1 1s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes wave1 {
+  0% {
+    transform: translateX(-25px);
+  }
+  100% {
+    transform: translateX(25px);
+  }
+}
+
+/* 地平線圖片位置 */
+.ocean-container .hor3 img {
+  position: absolute;
+  top: 200px;
+  pointer-events: none;
+}
+
+/* 島嶼圖片位置與尺寸 */
+.ocean-container .isl2 img {
+  width: 700px;
+  height: 100px;
+  position: absolute;
+  top: 125px;
+  left: calc(50vw - 350px);
+  pointer-events: none;
+}
+
+/* ==============================
+   4. 船隻選項與互動狀態
+   ============================== */
+
+/* 三艘船水平排列，船與船之間留 300px */
+.boat.parallax-layer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 300px;
+  z-index: 99;
+  pointer-events: auto;
+}
+
+/* 隱藏原生 radio，仍可透過 label 點選 */
+.boat input[type="radio"] {
+  display: none;
+}
+
+/* 船與資訊圖共用定位容器 */
+.a,
+.b,
+.c {
+  position: relative;
+  display: inline-block;
+  animation: boat 1s ease-in-out infinite alternate;
+}
+/* 船隻左右搖晃 */
+@keyframes boat {
+  0% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(5deg);
+  }
+}
+
+/* 船隻圖片 */
+.boatimg {
+  display: block;
+}
+
+/* 資訊圖預設隱藏，放在船圖下方 15px */
+.infoimg {
+  position: absolute;
+  top: calc(100% + 15px);
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+}
+
+/* 滑鼠移到個別船隻時顯示對應資訊圖 */
+.a:hover .infoimg,
+.b:hover .infoimg,
+.c:hover .infoimg {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 滑鼠移到船隻時切換圖片 */
+.boatimg:hover {
+  content: url(../IMG/index_boat_hover.png);
+}
+
+/* 選取 radio 時切換船隻圖片 */
+.boat input[type="radio"]:checked + label .boatimg {
+  content: url(../IMG/index_boat_active.png);
+}
+
+/* ==============================
+   5. 題目區與繼續按鈕
+   ============================== */
+
+/* 題目圖片與按鈕的排列容器 */
+.questionContainer {
+  position: absolute;
+  top: 50px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  height: 350px;
+}
+
+/* 題目圖片顯示方式 */
+.text {
+  display: inline-block;
+}
+
+/* 選擇答案後顯示的繼續按鈕 */
+.nextbtn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 80px;
+  position: absolute;
+  right: 0;
+  bottom: 80px;
+  background-color: #ffffff;
+  border: 2px solid transparent;
+  border-radius: 40px;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+/* 繼續按鈕文字顏色與大小 */
+.nextbtn p {
+  color: #11094d;
+  font-size: 24px;
+}
+
+/* 滑鼠移入按鈕時的顏色 */
+.nextbtn:hover {
+  background-color: #d4d3ff;
+  border: #4773f5 solid 2px;
+}
+
+/* ==============================
+   6. 雨景圖層與閃動效果
+   ============================== */
+
+/* 雨景容器鋪滿畫面，不攔截滑鼠操作 */
+.rain-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* 雨絲圖片鋪滿容器並置於前景 */
+.rain {
+  position: absolute;
+  z-index: 9;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: rain-fall 1s linear infinite;
+}
+
+/* 雨絲淡入淡出 */
+@keyframes rain-fall {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* ==============================
+   7. 頁面進場動畫
+   ============================== */
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

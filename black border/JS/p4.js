@@ -1,0 +1,38 @@
+document.addEventListener("mousemove", (e) => {
+  const layers = document.querySelectorAll(".parallax-layer");
+  const x = e.clientX / window.innerWidth - 0.5;
+  const y = e.clientY / window.innerHeight - 0.5;
+
+  layers.forEach((layer) => {
+    const speed = layer.getAttribute("data-speed");
+
+    // 【修改這裡】將原本的 -x 乘上更大的倍數（例如從 1 改成 2.5 或 3）
+    const moveX = -x * speed * 3;
+
+    // 上下移動幅度也可以同步放大
+    const moveY = -y * (speed * 0.5) * 2.5;
+
+    layer.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
+  });
+});
+
+// 抓取所有 Radio 選項
+const radios = document.querySelectorAll('input[name="p4"]');
+
+// 抓取繼續航行按鈕
+const nextbtn = document.querySelector(".nextbtn");
+
+// 網頁載入時，先隱藏按鈕
+nextbtn.style.display = "none";
+
+// 監聽 Radio 選項的變化
+radios.forEach((radio) => {
+  radio.addEventListener("change", function () {
+    // 確認是否有選取選項
+    const selected = document.querySelector('input[name="p4"]:checked');
+
+    if (selected) {
+      nextbtn.style.display = "flex";
+    }
+  });
+});

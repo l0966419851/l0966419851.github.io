@@ -1,0 +1,162 @@
+/* 定義淡入動畫 */
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px); /* 從下方稍微浮上來 */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+body {
+  animation: pageFadeIn 0.5s ease-out;
+  background-color: #0d0759;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center; /* 讓背景與前景群組都水平置中 */
+  align-items: center; /* 若也想垂直置中可保留，不需要可刪除 */
+  position: relative;
+  overflow-x: hidden; /* 避免背景過寬出現水平捲軸 */
+}
+
+/* 問題與繼續航行按鈕 */
+.questionContainer {
+  position: absolute;
+  top: 50px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column; /* 讓子元素垂直由上往下排列 */
+  justify-content: center; /* 垂直置中 */
+  align-items: center; /* 水平置中（若不需要水平置中可移除） */
+  gap: 50px;
+  /* 需給容器一個高度，垂直置中才有空間可以「置中」 */
+  height: 350px;
+}
+
+.nextbtn {
+  display: none;
+  flex-direction: column; /* 讓子元素垂直由上往下排列 */
+  justify-content: center; /* 垂直置中 */
+  align-items: center; /* 水平置中（若不需要水平置中可移除） */
+  width: 300px;
+  height: 80px;
+  background-color: #ffffff;
+  border: 2px solid transparent;
+  border-radius: 40px;
+  text-decoration: none;
+  position: absolute;
+  right: 0px;
+  bottom: 80px;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.nextbtn p {
+  color: #11094d;
+  font-size: 24px;
+}
+.nextbtn:hover {
+  background-color: #d4d3ff;
+  border: #4773f5 solid 2px;
+}
+.text {
+  display: inline-block;
+}
+
+/* 選項容器設定 */
+.optcontainer {
+  position: absolute;
+  top: calc(50vh - 150px);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 110px;
+}
+/* 提取共用樣式：讓 .opta, .optb, .optc 的 label 直接受 Flexbox 控制 */
+.opta label,
+.optb label,
+.optc label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 450px;
+  height: 650px;
+  border: transparent 2px;
+  border-radius: 225px;
+  background-color: #0c0858;
+  z-index: 5;
+  position: relative; /* 改用 relative，或直接移除 position */
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+/* 共用 Hover 與 Checked 狀態 */
+.opta label:hover {
+  border: #ffffff dashed 2px;
+  cursor: pointer;
+  content: url(../IMG/p3_opta_hover.png);
+}
+.optb label:hover {
+  border: #ffffff dashed 2px;
+  cursor: pointer;
+  content: url(../IMG/p3_optb_hover.png);
+}
+.optc label:hover {
+  border: #ffffff dashed 2px;
+  cursor: pointer;
+  content: url(../IMG/p3_optc_hover.png);
+}
+
+.opta input:checked ~ label,
+.optb input:checked ~ label,
+.optc input:checked ~ label {
+  border: #ffffff solid 3px;
+}
+
+.opta input,
+.optb input,
+.optc input {
+  display: none;
+}
+
+/* gif設定 */
+.gif {
+  position: absolute;
+  display: flex;
+  flex-direction: column; /* 讓子元素垂直由上往下排列 */
+  justify-content: center; /* 垂直置中 */
+  align-items: center; /* 水平置中（若不需要水平置中可移除） */
+  width: 420px;
+  height: 450px;
+  overflow: hidden;
+}
+
+.optAgif {
+  width: 300px;
+  height: 450px;
+  display: inline-block;
+}
+.optBgif {
+  width: 420px;
+  height: 500px;
+  display: inline-block;
+  border-radius: 20%;
+}
+.optCgif {
+  width: 420px;
+  height: 500px;
+  display: inline-block;
+  border-radius: 20%;
+}

@@ -1,0 +1,100 @@
+/* 三艘船水平排列，船與船之間留 300px */
+.boat.parallax-layer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 300px;
+}
+
+/* 隱藏原生 radio，仍可透過 label 點選 */
+.boat input[type="radio"] {
+  display: none;
+}
+
+/* 船與資訊圖共用定位容器 */
+.a,
+.b,
+.c {
+  position: relative;
+  display: inline-block;
+  animation: boat 1s ease-in-out infinite alternate;
+}
+/* 船隻左右搖晃 */
+@keyframes boat {
+  0% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(5deg);
+  }
+}
+
+/* 船隻圖片 */
+.boatimg {
+  display: block;
+}
+
+/* 資訊圖預設隱藏，放在船圖下方 15px */
+.infoimg {
+  position: absolute;
+  top: calc(100% + 15px);
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+}
+
+/* 滑鼠移到個別船隻時顯示對應資訊圖 */
+.a:hover .infoimg,
+.b:hover .infoimg,
+.c:hover .infoimg {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 滑鼠移到船隻時切換圖片 */
+.boatimg:hover {
+  content: url(../IMG/index_boat_hover.png);
+}
+
+/* 選取 radio 時切換船隻圖片 */
+.boat input[type="radio"]:checked + label .boatimg {
+  content: url(../IMG/index_boat_active.png);
+}
+
+.start {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 300px;
+}
+
+/* 船與開始的共同容器 */
+.st {
+  position: relative;
+  display: inline-block;
+}
+
+/* 船的圖片 */
+.boatimg {
+  display: block;
+}
+
+/* 開始圖片 */
+.startimg {
+  position: absolute;
+  bottom: calc(100% + 15px);
+  left: 50%;
+  transform: translateX(-50%);
+
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+}
+
+/* 滑鼠移到船的圖片時，顯示開始 */
+.st:has(.boatimg:hover) .startimg {
+  opacity: 1;
+  visibility: visible;
+}

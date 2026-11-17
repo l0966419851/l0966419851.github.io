@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>黑水溝</title>
+    <link rel="stylesheet" href="./CSS/p5.css" />
+  </head>
+  <body>
+    <div class="questionContainer">
+      <img src="./IMG/p5_text.png" class="text" />
+      <a href="p6.html" class="nextbtn" id="nextbtn">
+        <p>繼續航行</p>
+      </a>
+    </div>
+    <div class="ocean-container" id="scene">
+      <div class="wave4 parallax-layer" data-speed="90">
+        <img src="./IMG/index_wave8.png" class="waveimg" />
+      </div>
+      <div class="wave3 parallax-layer" data-speed="80">
+        <img src="./IMG/index_wave7.png" class="waveimg" />
+      </div>
+      <div class="boat parallax-layer" data-speed="70">
+        <img src="./IMG/p5_paddle.png" class="boatimg" />
+      </div>
+      <div class="wave2 parallax-layer" data-speed="60">
+        <img src="./IMG/index_wave6.png" class="waveimg" />
+      </div>
+      <div class="wave1 parallax-layer" data-speed="50">
+        <img src="./IMG/index_wave4.png" class="waveimg" />
+      </div>
+    </div>
+    <div class="optcontainer">
+      <div class="opta">
+        <input type="radio" name="p5" id="opta" />
+        <label for="opta">
+          <div class="texta">
+            <p>把旁邊的老同鄉踢下海， <br />讓自己可以安全的繼續搭這艘船</p>
+          </div>
+        </label>
+      </div>
+      <div class="optb">
+        <input type="radio" name="p5" id="optb" />
+        <label for="optb">
+          <div class="textb">
+            <p>跟隔壁老薛買塊布當口罩繼續搭</p>
+          </div>
+        </label>
+      </div>
+      <div class="optc">
+        <input type="radio" name="p5" id="optc" />
+        <label for="optc">
+          <div class="textc">
+            <p>跟著船長換船避免遭到清兵追捕</p>
+          </div>
+        </label>
+      </div>
+    </div>
+    <script src="./JS/p5.js"></script>
+  </body>
+</html>

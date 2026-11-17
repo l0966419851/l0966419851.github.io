@@ -1,0 +1,283 @@
+/* 定義淡入動畫 */
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px); /* 從下方稍微浮上來 */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+body {
+  animation: pageFadeIn 0.5s ease-out;
+  background-color: #11094d;
+  margin: 0;
+  padding: 0;
+}
+/* 問題與繼續航行按鈕 */
+.questionContainer {
+  position: absolute;
+  z-index: 9;
+  left: calc(50vw - 855px);
+  top: 50px;
+  display: flex;
+  flex-direction: column; /* 讓子元素垂直由上往下排列 */
+  justify-content: center; /* 垂直置中 */
+  align-items: center; /* 水平置中（若不需要水平置中可移除） */
+  gap: 50px;
+  /* 需給容器一個高度，垂直置中才有空間可以「置中」 */
+  height: 135px;
+}
+
+.nextbtn {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  display: none;
+  flex-direction: column; /* 讓子元素垂直由上往下排列 */
+  justify-content: center; /* 垂直置中 */
+  align-items: center; /* 水平置中（若不需要水平置中可移除） */
+  width: 300px;
+  height: 80px;
+  background-color: #ffffff;
+  border: 2px solid transparent;
+  border-radius: 40px;
+  text-decoration: none;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.nextbtn p {
+  color: #11094d;
+  font-size: 24px;
+}
+.nextbtn:hover {
+  background-color: #d4d3ff;
+  border: #4773f5 solid 2px;
+}
+.text {
+  display: inline-block;
+  width: 1720px;
+  height: 130px;
+}
+
+/*背景*/
+.waveimg {
+  width: 120%;
+  max-width: none;
+  margin-left: -10%;
+  display: block;
+  pointer-events: none;
+}
+
+.ocean-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-image: url(../IMG/index_ocean1.png);
+  background-size: cover;
+  overflow: hidden; /* 避免滑鼠移動時畫面外露 */
+  pointer-events: none;
+}
+
+/* 1. 視差容器：只負責 JS 的 transform 移動 */
+.parallax-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transition: transform 0.1s ease-out;
+  pointer-events: none;
+}
+
+/* 將 z-index 設定在與 .parallax-layer 同一層級的 div 上 */
+
+.wave4 {
+  z-index: 8;
+  pointer-events: none;
+}
+.wave3 {
+  z-index: 7;
+  pointer-events: none;
+}
+.wave2 {
+  z-index: 6;
+  pointer-events: none;
+}
+.boat {
+  z-index: 5;
+  pointer-events: none;
+}
+.wave1 {
+  z-index: 4;
+  pointer-events: none;
+}
+.hor3 {
+  z-index: 3;
+  pointer-events: none;
+}
+.isl2 {
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* 內層的 img 維持定位與尺寸設定即可（原本裡面的 z-index 可刪除） */
+
+.ocean-container .wave4 img {
+  position: absolute;
+  bottom: 0px;
+  animation: wave4 1s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes wave4 {
+  0% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(20px);
+  }
+}
+
+.ocean-container .wave3 img {
+  position: absolute;
+  bottom: 150px;
+  animation: wave3 1s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes wave3 {
+  0% {
+    transform: translateX(-20px);
+  }
+  100% {
+    transform: translateX(20px);
+  }
+}
+
+.ocean-container .wave2 img {
+  position: absolute;
+  bottom: 300px;
+  animation: wave2 1s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes wave2 {
+  0% {
+    transform: translateY(-25px);
+  }
+  100% {
+    transform: translateY(25px);
+  }
+}
+
+.ocean-container .wave1 img {
+  position: absolute;
+  bottom: 450px;
+  animation: wave1 1s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes wave1 {
+  0% {
+    transform: translateX(-25px); /* 向左移動 20px */
+  }
+  100% {
+    transform: translateX(25px); /* 向右移動 20px */
+  }
+}
+.ocean-container .boat img {
+  position: absolute;
+  top: -80px;
+  transform-origin: center top;
+  animation: boat 1s ease-in-out infinite alternate;
+  pointer-events: auto;
+}
+@keyframes boat {
+  0% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(10deg);
+  }
+}
+.boatimg {
+  transition: all 0.15s ease;
+}
+/* 選項容器設定 */
+.optcontainer {
+  position: absolute;
+  left: calc(50vw - 737px);
+  bottom: 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* 水平置中（若不需要水平置中可移除） */
+  gap: 100px;
+  z-index: 999;
+}
+
+/* 提取共用樣式：讓 .opta, .optb, .optc 的 label 直接受 Flexbox 控制 */
+.opta label,
+.optb label,
+.optc label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 460px;
+  height: 160px;
+  border: #4773f5 solid 2px;
+  border-radius: 150px;
+  background-color: #0c0858;
+  z-index: 5;
+  position: relative; /* 改用 relative，或直接移除 position */
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+/* 共用 Hover 與 Checked 狀態 */
+.opta label:hover,
+.optb label:hover,
+.optc label:hover {
+  border: #ffffff dashed 2px;
+  cursor: pointer;
+}
+
+.opta input:checked ~ label,
+.optb input:checked ~ label,
+.optc input:checked ~ label {
+  border: #ffffff solid 3px;
+}
+
+.opta input,
+.optb input,
+.optc input {
+  display: none;
+}
+
+/* 文字容器設定 */
+.texta,
+.textb,
+.textc {
+  position: absolute;
+  /* 移除原本無效的 justify-content / align-items（這些屬性只對 Flex 容器有效） */
+}
+
+.texta p,
+.textb p,
+.textc p {
+  color: #ffffff;
+  font-size: 24px;
+  margin: 0;
+  line-height: 1.4;
+  text-align: center;
+}

@@ -51,10 +51,7 @@ body {
   z-index: 6;
   pointer-events: none;
 }
-.boat {
-  z-index: 5;
-  pointer-events: none;
-}
+
 .wave1 {
   z-index: 4;
   pointer-events: none;
@@ -137,30 +134,83 @@ body {
     transform: translateX(25px); /* 向右移動 20px */
   }
 }
-.ocean-container .boat img {
-  width: 270px;
-  height: 290px;
+
+.boat {
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* 船與開始圖片的共同容器 */
+.start {
   position: absolute;
+  width: 270px;
+  height: 350px;
   left: calc(100vw - 350px);
   bottom: 420px;
-  transform-origin: center bottom;
-  animation: boat 1s ease-in-out infinite alternate;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  pointer-events: none;
+}
+
+.st {
+  position: relative;
+  display: inline-block;
   pointer-events: auto;
 }
+
+/* 船的圖片 */
+.boatimg {
+  width: 270px;
+  height: 290px;
+  display: block;
+
+  transform-origin: center bottom;
+  animation: boat 1s ease-in-out infinite alternate;
+  transition: all 0.15s ease;
+}
+
+/* 船的搖晃動畫 */
 @keyframes boat {
   0% {
     transform: rotate(-5deg);
   }
+
   100% {
     transform: rotate(5deg);
   }
 }
-.boatimg {
-  transition: all 0.15s ease;
+
+/* 開始圖片 */
+.startimg {
+  width: auto;
+  height: auto;
+
+  position: absolute;
+  bottom: calc(100% + 15px);
+  left: 50%;
+  transform: translateX(-50%);
+
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+
+  pointer-events: none;
 }
+
+/* Hover 船時顯示開始圖片 */
+.st:hover .startimg {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* 船的互動效果 */
 .boatimg:hover {
   content: url(../IMG/index_boat_hover.png);
 }
+
 .boatimg:active {
   content: url(../IMG/index_boat_active.png);
 }
