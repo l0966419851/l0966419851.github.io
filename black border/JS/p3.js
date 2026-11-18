@@ -1,17 +1,13 @@
-// 抓取所有 Radio 選項
-const radios = document.querySelectorAll('input[name="p3"]');
+const p22Options = document.querySelectorAll('input[name="p22"]');
+const nextLink = document.querySelector(".next");
 
-// 抓取繼續航行按鈕
-const nextbtn = document.querySelector(".nextbtn");
+function updateNextVisibility() {
+  const hasSelection = Array.from(p22Options).some((option) => option.checked);
+  nextLink.classList.toggle("is-visible", hasSelection);
+}
 
-// 監聽 Radio 選項的變化
-radios.forEach((radio) => {
-  radio.addEventListener("change", function () {
-    // 確認是否有選取選項
-    const selected = document.querySelector('input[name="p3"]:checked');
-
-    if (selected) {
-      nextbtn.style.display = "flex";
-    }
-  });
+p22Options.forEach((option) => {
+  option.addEventListener("change", updateNextVisibility);
 });
+
+updateNextVisibility();
